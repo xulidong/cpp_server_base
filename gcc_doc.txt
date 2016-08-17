@@ -1,0 +1,12 @@
+gcc编译过程
+1 预处理(Pre-Processing)
+    gcc -E 1.c -o 1.i
+2 编译(Compiling)
+    gcc -S 1.i -o 1.s
+3 汇编(Assembling)
+    gcc -c 1.s -o 1.o
+4 链接(Linking)
+    gcc 1.o -o exe
+
+工具连全过程：
+    gcc *.c -o exe

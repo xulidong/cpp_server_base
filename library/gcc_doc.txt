@@ -1,0 +1,48 @@
+gcc编译过程
+1 预处理(Pre-Processing)
+    gcc -E 1.c -o 1.i
+2 编译(Compiling)
+    gcc -S 1.i -o 1.s
+3 汇编(Assembling)
+    gcc -c 1.s -o 1.o
+4 链接(Linking)
+    gcc 1.o -o exe
+
+工具连全过程：
+    gcc *.c -o exe
+
+工程的目录结构
+src 所有.c文件
+inc 所有.h文件
+lib 所有.so文件
+
+动态库静态库的命名规则：libXXX.so/libxxx.a
+链接动态库：-lxxx
+常用技巧：把命令编程脚本，添加可执行权限，如：
+mggcc ==> gcc 1.c -o 1.exe -lXXX => chmod u+x/chomod 775 
+
+file filename.a 查看文件的属性
+nm fliename.a 查看库中包含的函数
+
+使用
+gcc main.c -L. -o main.exe -lmyadd
+-L .告诉编译器在当前目录中查找库文件
+-l 选项告诉编译器要使用的库名
+
+静态库生成
+gcc main.c -lhello -L. -static -o main
+-static选项是告诉编译器,hello是静态库
+gcc main.c libhello.a -L. -o main
+这样就可以不用加-static
+
+静态库编译生成可执行文件之后，可以脱离静态库使用
+
+动态库生成
+-fPIC表示动态库放在任意位置都可以，否则只能放在home/xxx/lib中才能使用
+编译时.so在编译命令路径下可以成功，但是不能运行
+把当前路径加入环境变量，可以运行成功
+动态库的搜索路径：
+    当一个exe执行时，会搜索LD_LIBRAR_PATH指定的路径
+    可以修改LD_LIBRAR_PATH得值，添加当前路径
+
+    或者在当前用户的目录下创建一个lib，然后将动态库拷贝到这个文件中

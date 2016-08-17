@@ -1,0 +1,2 @@
+gcc -c -I ./inc ./src/myadd.c -o myadd.o
+ar rcs ./bin/libmyadd.a myadd.o
